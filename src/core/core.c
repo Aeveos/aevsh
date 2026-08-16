@@ -8,6 +8,7 @@
 
 char input[256];
 int num = 0;
+int builtins_success = 0;
 
 int main()
 {
@@ -27,7 +28,20 @@ int main()
 		fflush(stdin);
 
 		lexer(input);
-		execute_builtins(token, token_count);
+		
+		builtins_success = execute_builtins(token, token_count);
+		if (builtins_success == 1) {
+			char* args[64];
+
+			for (int i = 0;i < token_count;i++) {
+				args[i] = token[0];
+			}
+
+			args[token_count] = NULL;
+
+			_spawnvp(_P_WAIT, args[0], args);
+
+		}
 
 	}
 }

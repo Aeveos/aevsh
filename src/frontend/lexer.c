@@ -1,5 +1,7 @@
 #include "frontend/lexer.h"
 
+// #define DEBUG // Comment this preprocessor to turn of debugging
+
 int index = 0;
 int quotes = 0;
 int index_start = 0;
@@ -33,7 +35,11 @@ int lexer(char input[256])
 
 			token[token_count][token_length] = '\0'; // For example. Token_buffer[token_length] = 5 and 5 is a namespace so thats a end '\0'
 
-			printf("Token : %s\n", token[token_count]);
+
+#ifdef DEBUG
+			printf("Token : %s\n", token[token_count]); // For debbuging
+#endif // DEBUG
+
 			index_start = index + 1;
 			token_count++;
 
@@ -48,5 +54,3 @@ int lexer(char input[256])
 	index_start = 0;
 	return 0;
 }
-
-

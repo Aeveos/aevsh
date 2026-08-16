@@ -11,10 +11,14 @@ struct Command {
 	char* cmd_name;
 	int (*func)(char args[64][256], int args_count);
 	char description[256];
+	//char thorough[256];
 };
 
-int cmd_exit(char args[64][256], int args_count);
-int cmd_help(char args[64][256], int args_count);
-int cmd_cd(char args[64][256], int args_count);
+
+int cmd_clear(char args[64][256], int args_count);
 int cmd_pwd(char args[64][256], int args_count);
+int cmd_cd(char args[64][256], int args_count);
+int cmd_exit(char args[64][256], int args_count);
+int cmd_echo(char args[64][256], int args_count);
+int cmd_help(char args[64][256], int args_count);
 int execute_builtins(char args[64][256], int args_count);
