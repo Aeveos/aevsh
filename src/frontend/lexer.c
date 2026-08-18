@@ -35,11 +35,10 @@ int lexer(char input[256])
 
 			token[token_count][token_length] = '\0'; // For example. Token_buffer[token_length] = 5 and 5 is a namespace so thats a end '\0'
 
-
 #ifdef DEBUG
 			printf("Token : %s\n", token[token_count]); // For debbuging
 #endif // DEBUG
-
+			
 			index_start = index + 1;
 			token_count++;
 
@@ -49,6 +48,7 @@ int lexer(char input[256])
 
 		}
 		index++;
+
 	}
 	index = 0;
 	index_start = 0;
