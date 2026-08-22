@@ -5,6 +5,7 @@
 #include "core/core.h"
 
 char input[256];
+char pwd[256];
 int builtins_success = 0;
 int _spawnvp_success = 0;
 int strcspn_size = 0;
@@ -15,12 +16,17 @@ int main()
 	while (1) {
 
 		token_count = 0;
+		// free(pwd);
 
-		char pwd[256];
-		_getcwd(pwd, sizeof(pwd));
+		if (_getcwd(pwd, sizeof(pwd)) == NULL)
+			perror("_getcwd error");
 		printf("%s> ", pwd);
 
 		if (fgets(input, sizeof(input), stdin) != NULL) {
+
+			if (input[0] == '\n' || '\0') {
+				continue;
+			}
 
 			lexer(input);
 

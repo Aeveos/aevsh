@@ -26,16 +26,17 @@ int cmd_pwd(char args[64][256], int args_count) {
 
 	char pwd[256];
 
-	if (_getcwd(pwd, sizeof(pwd)) != 0) {
-		printf("%s\n", pwd);
+	if (_getcwd(pwd, sizeof(pwd)) == NULL) {
+		perror("_getcwd error in builtins.h");
 		printf("\n");
-	}
+	}	
 	else {
-		printf("Unable to print the current working directory");
+		printf("%s\n", pwd);
 		printf("\n");
 	}
 
 	return 0;
+
 }
 
 int cmd_cd(char args[64][256], int args_count) {
@@ -56,7 +57,7 @@ int cmd_cd(char args[64][256], int args_count) {
 }
 
 int cmd_exit(char args[64][256], int args_count) {
-	printf("GoodBye Dear User!!!");
+	//printf("GoodBye Dear User!!!");
 	exit(0);
 
 	return 0;
