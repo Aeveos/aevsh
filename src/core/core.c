@@ -7,24 +7,27 @@
 char input[256];
 char pwd[256];
 int builtins_success = 0;
-int _spawnvp_success = 0;
-int strcspn_size = 0;
+intptr_t _spawnvp_success = 0;
+int system_success = 0;
 
-int main()
-{
+int main() {
 	
 	while (1) {
 
 		token_count = 0;
 		// free(pwd);
 
-		if (_getcwd(pwd, sizeof(pwd)) == NULL)
+		if (_getcwd(pwd, sizeof(pwd)) == NULL) {
+
 			perror("_getcwd error");
+	
+		}
 		printf("%s> ", pwd);
 
 		if (fgets(input, sizeof(input), stdin) != NULL) {
 
 			if (input[0] == '\n' || '\0') {
+
 				continue;
 			}
 
@@ -46,16 +49,30 @@ int main()
 				args[token_count] = NULL;
 
 				_spawnvp_success = _spawnvp(_P_WAIT, args[0], args);
+
 				if (_spawnvp_success < 0) {
-					printf("'%s' is not recognized as an internal or external command,\noperable program or batch file.\n", args[0]);
-					printf("\n");
+
+					/*printf("'%s' is not recognized as an internal or external command,\noperable program or batch file.\n", args[0]);
+					printf("\n");*/
+
+					system_success = system(input);
+
+					if (system_success < 0) {
+
+						printf("'%s' is not recognized as an internal or external command,\noperable program or batch file.\n", args[0]);
+
+					    printf("\n");
+
+					}
 				}
 
 		    }
 
 		}
 		else {
+
 			printf("Error : Code 1"); 
+
 		}
 	}
 }
