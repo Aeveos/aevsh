@@ -1,6 +1,6 @@
 #pragma once
 
-extern int index;
+extern int input_index;
 extern int quotes;
 extern int index_start;
 extern int token_length;

@@ -1,23 +1,24 @@
 // Shell.c : Defines the entry point for the application.
 
-// Tasks : 1.Improve how the shell works with cmd.exe to run its commands. 2.Add autocompletion 3. Improve the lexer
+// Tasks : 1.Improve how the shell works with cmd.exe to run its commands. 2.Add autocompletion 3. Improve the lexer and investigate :
+
+// Investigate why system executes echo as its builtin and why it just continues when : is types.
 
 #include "frontend/lexer.h"
 #include "exec/builtins.h"
 #include "core/core.h"
 
 char input[256];
-char pwd[256];
+static char pwd[256];
 char history[10][256];
 int history_count = 0;
-int builtins_success = 0;
-intptr_t _spawnvp_success = 0;
-int system_success = 0;
+static int builtins_success = 0;
+static intptr_t spawnvp_success = 0;
+static int system_success = 0;
 
 int main() {
-	
-	while (1) {
 
+	while (1) {
 		token_count = 0;
 		// free(pwd);
 
@@ -54,11 +55,11 @@ int main() {
 
 				}
 
-				args[token_count] = NULL;
+				args[token_count] = nullptr;
 
-				_spawnvp_success = _spawnvp(_P_WAIT, args[0], args);
+				spawnvp_success = _spawnvp(_P_WAIT, args[0], args);
 
-				if (_spawnvp_success < 0) {
+				if (spawnvp_success < 0) {
 
 					system_success = system(input);
 
@@ -70,10 +71,9 @@ int main() {
 
 					}
 
-					/*printf(RED "'%s' is not recognized as an internal or external command,\noperable program or batch file.\n" RESET, args[0]);
+					printf(RED "'%s' is not recognized as an internal or external command,\noperable program or batch file.\n" RESET, args[0]);
 
-					printf("\n");*/
-
+					printf("\n");
 
 				}
 
@@ -86,5 +86,4 @@ int main() {
 
 		}
 	}
-	
 }

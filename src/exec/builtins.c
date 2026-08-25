@@ -71,6 +71,8 @@ int cmd_echo(char args[64][256], int args_count) {
 		printf("%s ", args[i]);
 	}
 	printf("\n");
+
+	return 0;
 }
 
 int cmd_help(char args[64][256], int args_count) {
@@ -97,6 +99,8 @@ int cmd_his(char args[64][256], int args_count) {
 		printf("%d\t\t%s", z, history[z]);
 	}
 	printf("\n");
+
+	return 0;
 }
 
 int execute_builtins(char args[64][256], int args_count) {

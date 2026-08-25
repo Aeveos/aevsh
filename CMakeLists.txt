@@ -23,4 +23,7 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Aevsh PROPERTY C_STANDARD 23)
 endif()
 
-# TODO: Add tests and install targets if needed.
+if(MSVC)
+    add_compile_options(/std:clatest)
+endif()
+
