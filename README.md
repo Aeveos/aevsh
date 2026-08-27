@@ -11,13 +11,13 @@
 > [!IMPORTANT]
 > Aevsh is currently in active development. While you can execute simple external and built-in commands, the core shell implementation is still incomplete. It is not yet recommended for daily or production use.
 
-## 🚀 What is Aevsh?
+## What is Aevsh?
 
 Aevsh is a cross-platform shell inspired by the rich features of PowerShell and the user-friendly design of Fish. This is a personal hobby project currently in active development, meaning it is constantly growing and evolving. The long-term vision is to build a robust shell capable of handling complex tasks like advanced scripting, background job control, and command pipelines. However, because this is a learning project built from the ground up, these advanced features will be implemented one by one and may or may not be included in the final version. For now, the primary focus is to learn how operating systems work under the hood and getting the core shell basics running smoothly!
 
 ## Current status
 
-Today, users can write basic commands such as cd, pwd, clear, echo, history, exit and some external commands.
+At this point Aevsh can successfully handle the basic built-in commands like `cd`, `pwd`, `clear`, `echo`, `history` and `exit`. It can also execute simple external programs. It is a solid functional base that I am actively adding upon.
 
 ## Implementation tracker
 
