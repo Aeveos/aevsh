@@ -1,0 +1,28 @@
+#include <Windows.h>
+
+IDI_AEVSHICON ICON "aevsh.ico"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     0,1,0,0
+PRODUCTVERSION  0,1,0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904B0"  // Language: US English (0x0409), Character Set: Unicode (0x04B0)
+    BEGIN
+      VALUE "CompanyName",      "Aeveos"
+      VALUE "FileDescription",  "Aevsh v0.1.0"
+      VALUE "FileVersion",      "0.1.0.0"
+      VALUE "InternalName",     "aevsh"
+      VALUE "OriginalFilename", "Aevsh.exe"
+      VALUE "ProductName",      "aevsh"
+      VALUE "ProductVersion",   "0.1.0.0"
+      VALUE "Comments",         "A working shell"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 0x04B0
+  END
+END

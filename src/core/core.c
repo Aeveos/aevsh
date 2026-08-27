@@ -4,9 +4,9 @@
 
 // Investigate why system executes echo as its builtin and why it just continues when : is types.
 
+#include "core/core.h"
 #include "frontend/lexer.h"
 #include "exec/builtins.h"
-#include "core/core.h"
 
 char input[256];
 static char pwd[256];
@@ -17,6 +17,8 @@ static intptr_t spawnvp_success = 0;
 static int system_success = 0;
 
 int main() {
+
+	SetConsoleTitleA("aevsh");
 
 	while (1) {
 		token_count = 0;
@@ -55,7 +57,7 @@ int main() {
 
 				}
 
-				args[token_count] = nullptr;
+				args[token_count] = NULL;
 
 				spawnvp_success = _spawnvp(_P_WAIT, args[0], args);
 

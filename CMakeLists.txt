@@ -13,7 +13,8 @@ project ("Aevsh" C)
 
 # Add source to this project's executable.
 
-add_executable (Aevsh "src/core/core.c" "src/exec/builtins.c" "src/frontend/lexer.c")
+add_executable (Aevsh "src/core/core.c" "src/exec/builtins.c" "src/frontend/lexer.c"
+        assets/resource.rc)
 
 target_include_directories(Aevsh PRIVATE 
     ${CMAKE_SOURCE_DIR}/include
@@ -21,9 +22,5 @@ target_include_directories(Aevsh PRIVATE
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Aevsh PROPERTY C_STANDARD 23)
-endif()
-
-if(MSVC)
-    add_compile_options(/std:clatest)
 endif()
 
