@@ -5,7 +5,7 @@
 
   *A modern shell written in C*
   
-  <img width="1110" height="625" alt="Aevsh Interface" src="https://github.com/user-attachments/assets/12956448-723f-4751-aedb-6ccad03462e0" />
+  <img width="1110" height="625" alt="Aevsh Interface" src="assets/Terminal_Aevsh.png" />
 </div>
 
 > [!IMPORTANT]
