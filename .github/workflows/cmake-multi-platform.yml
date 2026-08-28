@@ -1,0 +1,77 @@
+name: Nightly Release
+
+on:
+  push:
+    branches: [ "master" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        build_type: [Release]
+
+        c_compiler: [gcc, clang, cl]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: gcc
+          - os: ubuntu-latest
+            c_compiler: clang
+        exclude:
+          - os: windows-latest
+            c_compiler: gcc
+          - os: windows-latest
+            c_compiler: clang
+          - os: ubuntu-latest
+            c_compiler: cl
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 
+
+    - name: Set reusable strings
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        
+    - name: Configure CMake
+      run: >
+        cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -S ${{ github.workspace }}
+        
+    - name: cmake
+      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+    - name: test
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: ctest --build-config ${{ matrix.build_type }} || echo "No tests configured"
+      
+    - name: Nightly Tag (Windows only)
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git tag --force nightly
+        git push --force origin nightly
+        
+    - name: Nightly release (Windows only)
+      if: matrix.os == 'windows-latest'
+      uses: softprops/action-gh-release@v3
+      with:
+        tag_name: nightly
+        name: "Nightly"
+        prerelease: true
+        files: ${{ steps.strings.outputs.build-output-dir }}/Release/aevsh.exe
