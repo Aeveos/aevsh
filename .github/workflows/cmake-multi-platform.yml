@@ -21,8 +21,7 @@ jobs:
         include:
           - os: windows-latest
             c_compiler: cl
-          - os: ubuntu-latest
-            c_compiler: gcc
+         
         exclude:
           - os: windows-latest
             c_compiler: gcc
@@ -32,6 +31,8 @@ jobs:
             c_compiler: cl
           - os: ubuntu-latest
             c_compiler: clang
+          - os: ubuntu-latest
+            c_compiler: gcc  
 
     steps:
     - uses: actions/checkout@v4
