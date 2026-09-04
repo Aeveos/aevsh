@@ -3,7 +3,7 @@
 
 // #define DEBUG // Comment this preprocessor to turn of debugging
 
-int input_index = 0;
+int lexer_index = 0;
 int quotes = 0;
 int index_start = 0;
 int token_length = 0;
@@ -11,12 +11,12 @@ int token_count = 0;
 
 char token[64][256];
 
-int lexer(char input[256])
+int lexer(char source[256])
 {
 
-	while (input[input_index] != '\0') {
+	while (source[lexer_index] != '\0') {
 
-		char current = input[input_index]; // GG "Hello World"
+		char current = source[lexer_index]; // GG "Hello World"
 
 		if (current == '"') {
 
@@ -30,9 +30,9 @@ int lexer(char input[256])
 		else if ((current == ' ' || current == '\n' || current == '\0') && quotes == 0) {
 			// printf("We hit a boundary!!!");
 
-			token_length = input_index - index_start; // For Eg. Hello World; 5 - 0 = 5;  2nd Eg when it loops again token lenght will be 11-6 = 5
+			token_length = lexer_index - index_start; // For Eg. Hello World; 5 - 0 = 5;  2nd Eg when it loops again token lenght will be 11-6 = 5
 
-			strncpy(token[token_count], &input[index_start], token_length); // Destination, Source which is Input from the index start which is 0, and token length which is calculated above.
+			strncpy(token[token_count], &source[index_start], token_length); // Destination, Source which is Input from the index start which is 0, and token length which is calculated above.
 
 			token[token_count][token_length] = '\0'; // For example. Token_buffer[token_length] = 5 and 5 is a namespace so thats a end '\0'
 
@@ -40,7 +40,7 @@ int lexer(char input[256])
 			printf("Token : %s\n", token[token_count]); // For debbuging
 #endif // DEBUG
 			
-			index_start = input_index + 1;
+			index_start = lexer_index + 1;
 			token_count++;
 
 		}
@@ -48,10 +48,10 @@ int lexer(char input[256])
 		else {
 
 		}
-		input_index++;
+		lexer_index++;
 
 	}
-	input_index = 0;
+	lexer_index = 0;
 	index_start = 0;
 	return 0;
 }

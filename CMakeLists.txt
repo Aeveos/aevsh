@@ -3,6 +3,9 @@
 #
 cmake_minimum_required (VERSION 3.10)
 
+set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
@@ -13,8 +16,12 @@ project ("Aevsh" C)
 
 # Add source to this project's executable.
 
-add_executable (Aevsh "src/core/core.c" "src/exec/builtins.c" "src/frontend/lexer.c"
-        assets/resource.rc)
+add_executable (Aevsh "src/core/core.c"
+                      "src/exec/builtins.c"
+                      "src/frontend/lexer.c"
+                      "assets/resource.rc"
+                      "src/core/input.c"
+                      "src/platform/windows/terminal.c")
 
 target_include_directories(Aevsh PRIVATE 
     ${CMAKE_SOURCE_DIR}/include

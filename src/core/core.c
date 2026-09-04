@@ -4,11 +4,12 @@
 
 // Investigate why system executes echo as its builtin and why it just continues when : is types.
 
-#include "core/core.h"
-#include "frontend/lexer.h"
-#include "exec/builtins.h"
+#include <core/core.h>
+#include <frontend/lexer.h>
+#include <exec/builtins.h>
+#include <core/input.h>
 
-char input[256];
+char buffered_input[256];
 static char pwd[256];
 char history[10][256];
 int history_count = 0;
@@ -31,20 +32,35 @@ int main() {
 		}
 		printf("%s> ", pwd);
 
-		if (fgets(input, sizeof(input), stdin) != NULL) {
+		input();
 
-			if (input[0] == '\n' || '\0') {
+		if (unbuffered_input[0] == '\n' || '\0') {
+			continue;
+		}
+
+#ifdef DEBUG
+		printf("%s", unbuffered_input);
+#endif
+
+		lexer(unbuffered_input);
+
+		//lexer(buffered_input);
+
+		/*if (fgets(buffered_input, sizeof(buffered_input), stdin) != NULL) {
+
+			if (buffered_input[0] == '\n' || '\0') {
 
 				continue;
 
-			}
+			}*/
 
-			strcpy_s(history[history_count], sizeof(history[history_count]), input);
-			history_count++;
+			// strcpy_s(history[history_count], sizeof(history[history_count]), buffered_input);
+			// history_count++;
 
-			lexer(input);
 
-			fflush(stdin);
+
+
+			//fflush(stdin);
 
 			builtins_success = execute_builtins(token, token_count);
 
@@ -63,7 +79,7 @@ int main() {
 
 				if (spawnvp_success < 0) {
 
-					system_success = system(input);
+					system_success = system(unbuffered_input);
 
 					if (system_success < 0) {
 
@@ -73,19 +89,19 @@ int main() {
 
 					}
 
-					printf(RED "'%s' is not recognized as an internal or external command,\noperable program or batch file.\n" RESET, args[0]);
+					//printf(RED "'%s' is not recognized as an internal or external command,\noperable program or batch file.\n" RESET, args[0]);
 
-					printf("\n");
+					//printf("\n");
 
 				}
 
 			}
 
 		}
-		else {
+		/*else {
 
 			printf(BOLDRED "Error : Code 1" RESET);
 
-		}
+		}*/
 	}
-}
+ //}

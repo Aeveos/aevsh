@@ -1,7 +1,7 @@
-[package]
-name = "aevsh"
-version = "0.1.0"
-edition = "2024"
+# [package]
+# name = "aevsh"
+# version = "0.1.0"
+# edition = "2026"
 
-[dependencies]
-crossterm = "0.29.0"
+# [dependencies]
+# crossterm = "0.29.0"

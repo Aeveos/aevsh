@@ -1,5 +1,17 @@
 #pragma once
 
+#ifdef _WIN32
+
+#include <Windows.h>
+
+#endif
+
+#ifdef __linux__
+
+#include unistd.h
+
+#endif
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -18,7 +30,7 @@ struct Command {
 	char* cmd_name;
 	int (*func)(char args[64][256], int args_count);
 	char description[256];
-	//char thorough[256];
+	// char thorough[256];
 };
 
 
