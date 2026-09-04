@@ -25,7 +25,9 @@ At this point Aevsh can successfully handle the basic built-in commands like `cd
 - [x] Basic shell loop
 - [ ] Direct OS process creation
 - [ ] PATH resolution
-- [ ] Exit status tracking
+- [ ] Cross platform input
+  - [x] Windows
+  - [ ] Linux (W.I.P)
 
 ### Built-in Commands
 - [x] Navigation (`cd`, `pwd`)
