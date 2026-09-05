@@ -19,13 +19,37 @@ project ("Aevsh" C)
 add_executable (Aevsh "src/core/core.c"
                       "src/exec/builtins.c"
                       "src/frontend/lexer.c"
-                      "assets/resource.rc"
                       "src/core/input.c"
-                      "src/platform/windows/terminal.c")
-
-target_include_directories(Aevsh PRIVATE 
-    ${CMAKE_SOURCE_DIR}/include
 )
+
+target_include_directories(Aevsh PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+if(WIN32)
+
+  target_sources(Aevsh PRIVATE
+                 assets/resource.rc
+                 src/platform/windows/windowsTerminal.c)
+
+else ()
+
+  target_sources(Aevsh PRIVATE
+                 src/platform/linux/linuxTerminal.c)
+
+
+  find_package(PkgConfig REQUIRED)
+
+  set(PKG_CONFIG_USE_STATIC_LIBS ON)
+  pkg_check_modules(NC_CORE REQUIRED notcurses-core)
+
+  target_include_directories(Aevsh PRIVATE ${NC_CORE_STATIC_INCLUDE_DIRS})
+
+  target_link_libraries(Aevsh PRIVATE ${NC_CORE_STATIC_LIBRARIES})
+
+  target_link_options(Aevsh PRIVATE ${NC_CORE_STATIC_LDFLAGS})
+
+endif ()
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Aevsh PROPERTY C_STANDARD 23)

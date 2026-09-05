@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef enum {
 
@@ -25,13 +26,22 @@ typedef enum {
 
 }KeyModifier;
 
+/*typedef enum {
+
+    None,
+    Press,
+    Release,
+
+} KeyEventKind;*/
+
 typedef struct{
 
     KeyCode code;
     uint32_t character;
     uint32_t modifier;
+    bool event;
 
-} Key ;
+} Key;
 
 extern int initializeConsole();
 extern void disableRawMode();

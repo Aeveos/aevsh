@@ -39,6 +39,21 @@ static KeyCode convert_virtual_keycode(WORD virtual_keycode) {
     }
 }
 
+/*static KeyEventKind convert_keyboard_event(BOOL bKeyDown) {
+    switch (bKeyDown) {
+
+        case TRUE:
+            return Press;
+
+        case FALSE:
+            return Release;
+
+        default:
+            return None;
+
+    }
+}*/
+
 int initializeConsole() {
 
     hConsole = GetStdHandle(STD_INPUT_HANDLE);
@@ -125,6 +140,8 @@ int readKey(Key* key){
         if (!keyboard_event -> bKeyDown) {
             continue;
         }
+
+        /*key->event = convert_keyboard_event(keyboard_event -> bKeyDown);*/
 
         key->code = convert_virtual_keycode(keyboard_event -> wVirtualKeyCode);
 
