@@ -142,7 +142,7 @@ _TeamCity*
 .axoCover/*
 !.axoCover/settings.json
 
-# Coverlet is a free, cross platform Code Coverage Tool
+# Coverlet is a free, cross Termiox Code Coverage Tool
 coverage*.json
 coverage*.xml
 coverage*.info
@@ -356,7 +356,7 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-# Ionide (cross platform F# VS Code tools) working folder
+# Ionide (cross Termiox F# VS Code tools) working folder
 .ionide/
 
 # Fody - auto-generated XML schema

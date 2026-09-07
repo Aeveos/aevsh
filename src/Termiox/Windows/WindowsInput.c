@@ -1,11 +1,11 @@
 #ifdef _WIN32
 
-#include <platform/platform.h>
+#include <Termiox/Input.h>
 #include <Windows.h>
 #include <wincon.h>
 
-HANDLE hConsole = NULL;
-DWORD originalMode = 0;
+static HANDLE hConsole = NULL;
+static DWORD originalMode = 0;
 static int isConsoleInitialized = 0;
 
 
@@ -59,13 +59,13 @@ int initializeConsole() {
     hConsole = GetStdHandle(STD_INPUT_HANDLE);
 
     if (hConsole == NULL || hConsole == INVALID_HANDLE_VALUE) {
-        printf("GetStdHandle Failed");
+        fprintf(stderr, "GetStdHandle Failed!!");
         GetLastError();
         return 0;
     }
 
     if (!GetConsoleMode(hConsole, &originalMode)) {
-        printf("GetConsoleMode Failed");
+        fprintf(stderr, "GetConsoleMod Failed!!");
         GetLastError();
         return 0;
     }
@@ -87,7 +87,7 @@ void enableRawMode() {
     rawMode &= ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
 
     if (!SetConsoleMode(hConsole, rawMode)) {
-        printf("EnableRawMode Failed");
+        fprintf(stderr, "enableRawMode Failed!!");
         GetLastError();
     }
 
@@ -99,7 +99,7 @@ void disableRawMode() {
     }
 
     if (!SetConsoleMode(hConsole, originalMode)) {
-        printf("DisableRawMode Failed");
+        fprintf(stderr, "disableRawMode Failed!!");
         GetLastError();
     }
 
@@ -108,7 +108,7 @@ void disableRawMode() {
 int readKey(Key* key){
 
     if (key == NULL) {
-        printf("readKey: Key is NULL");
+        fprintf(stderr, "readKey: key is NULL");
         return 0;
     }
 
@@ -123,7 +123,7 @@ int readKey(Key* key){
     while (1) {
 
         if (!ReadConsoleInputW(hConsole, &record, 1, &events_read)) {
-            printf("ReadConsoleInput Failed");
+            fprintf(stderr, "ReadConsoleInputW failed to read!!");
             GetLastError();
         }
 
@@ -135,7 +135,7 @@ int readKey(Key* key){
             continue;
         }
 
-        KEY_EVENT_RECORD *keyboard_event = &record.Event.KeyEvent;
+        const KEY_EVENT_RECORD *keyboard_event = &record.Event.KeyEvent;
 
         if (!keyboard_event -> bKeyDown) {
             continue;

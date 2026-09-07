@@ -1,16 +1,15 @@
 #ifndef _WIN32
 
-// Write this via notcurses
-#include <platform/platform.h>
+#include <Termiox/Input.h>
 #include <locale.h>
 #include <notcurses/notcurses.h>
 #include <stdint.h>
 
-static struct notcurses *ncContext = NULL;
+static struct notcurses *ncContext = nullptr;
 static notcurses_options ncOptions;
 static int IsConsoleInitialized = 0;
 
-static KeyCode convert_notCurses_keycode(uint32_t notCurses_keycode) {
+static KeyCode convert_notCurses_keycode(const uint32_t notCurses_keycode) {
     switch (notCurses_keycode) {
 
         case NCKEY_ESC:
@@ -60,7 +59,7 @@ void enableRawMode() {
 
     ncContext = notcurses_init(&ncOptions, stdout);
 
-    if (ncContext == NULL) {
+    if (ncContext == nullptr) {
         fprintf(stderr, "NotCurses initialization failed!");
     }
 
@@ -70,16 +69,17 @@ void disableRawMode() {
     if (!IsConsoleInitialized) {
         return;
     }
-    if (ncContext != NULL) {
+    if (ncContext != nullptr) {
         notcurses_stop(ncContext);
     }
-    ncContext = NULL;
+    ncContext = nullptr;
+
 }
 int readKey(Key *key) {
 
     static ncinput record;
 
-    uint32_t id = notcurses_get_blocking(ncContext, &record);
+    const uint32_t id = notcurses_get_blocking(ncContext, &record);
 
     key->code = convert_notCurses_keycode(id);
 

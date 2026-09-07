@@ -30,12 +30,14 @@ if(WIN32)
 
   target_sources(Aevsh PRIVATE
                  assets/resource.rc
-                 src/platform/windows/windowsTerminal.c)
+                 src/Termiox/Windows/WindowsInput.c
+                 src/Termiox/Windows/WindowsPwd.c)
 
 else ()
 
   target_sources(Aevsh PRIVATE
-                 src/platform/linux/linuxTerminal.c)
+          src/Termiox/Linux/LinuxInput.c
+          src/Termiox/Linux/LinuxPwd.c)
 
 
   find_package(PkgConfig REQUIRED)

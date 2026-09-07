@@ -53,5 +53,6 @@ int lexer(char source[256])
 	}
 	lexer_index = 0;
 	index_start = 0;
-	return 0;
+
+	return 1;
 }
