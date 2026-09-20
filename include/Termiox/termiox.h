@@ -6,113 +6,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
-typedef enum {
-
-    // Regular
-    BLACK,
-    RED,
-    GREEN,
-    YELLOW,
-    BLUE,
-    PURPLE,
-    CYAN,
-    WHITE,
-
-    // Bold
-    BOLD_BLACK,
-    BOLD_RED,
-    BOLD_GREEN,
-    BOLD_YELLOW,
-    BOLD_BLUE,
-    BOLD_PURPLE,
-    BOLD_CYAN,
-    BOLD_WHITE,
-
-    COLOR_NONE,
-
-}Color;
-
-typedef enum {
-
-    // Underline
-    UNDERLINE_BLACK,
-    UNDERLINE_RED,
-    UNDERLINE_GREEN,
-    UNDERLINE_YELLOW,
-    UNDERLINE_BLUE,
-    UNDERLINE_PURPLE,
-    UNDERLINE_CYAN,
-    UNDERLINE_WHITE,
-
-    // Darkened (dim)
-    DIM_BLACK,
-    DIM_RED,
-    DIM_GREEN,
-    DIM_YELLOW,
-    DIM_BLUE,
-    DIM_PURPLE,
-    DIM_CYAN,
-    DIM_WHITE,
-
-    // Highlighters
-    HL_YELLOW,
-    HL_GREEN,
-    HL_CYAN,
-    HL_BLUE,
-    HL_RED,
-    HL_PURPLE,
-
-    // Background
-    BG_BLACK,
-    BG_RED,
-    BG_GREEN,
-    BG_YELLOW,
-    BG_BLUE,
-    BG_PURPLE,
-    BG_CYAN,
-    BG_WHITE,
-
-    // High intensity background
-    BG_HI_BLACK,
-    BG_HI_RED,
-    BG_HI_GREEN,
-    BG_HI_YELLOW,
-    BG_HI_BLUE,
-    BG_HI_PURPLE,
-    BG_HI_CYAN,
-    BG_HI_WHITE,
-
-    // Darkened high intensity
-    DIM_HI_BLACK,
-    DIM_HI_RED,
-    DIM_HI_GREEN,
-    DIM_HI_YELLOW,
-    DIM_HI_BLUE,
-    DIM_HI_PURPLE,
-    DIM_HI_CYAN,
-    DIM_HI_WHITE,
-
-    // High intensity
-    HI_BLACK,
-    HI_RED,
-    HI_GREEN,
-    HI_YELLOW,
-    HI_BLUE,
-    HI_PURPLE,
-    HI_CYAN,
-    HI_WHITE,
-
-    // Bold high intensity
-    B_HI_BLACK,
-    B_HI_RED,
-    B_HI_GREEN,
-    B_HI_YELLOW,
-    B_HI_BLUE,
-    B_HI_PURPLE,
-    B_HI_CYAN,
-    B_HI_WHITE,
-
-}ColorStyle;
 
 typedef enum {
 
@@ -159,19 +52,19 @@ extern void enableRawMode();
 extern int readKey(Key *key);
 
 /*PrintWorkingDirectory.h*/
-extern int PrintWorkingDirectory(Color color);
+extern int PrintWorkingDirectory(const char *color);
 
 /*Colors.h*/
 
 // Regular text
-#define aBLACK   "\033[0;30m"
-#define aRED     "\033[0;31m"
-#define aGREEN   "\033[0;32m"
-#define aYELLOW  "\033[0;33m"
-#define aBLUE    "\033[0;34m"
-#define aPURPLE  "\033[0;35m"
-#define aCYAN    "\033[0;36m"
-#define aWHITE   "\033[0;37m"
+#define BLACK   "\033[0;30m"
+#define RED     "\033[0;31m"
+#define GREEN   "\033[0;32m"
+#define YELLOW  "\033[0;33m"
+#define BLUE    "\033[0;34m"
+#define PURPLE  "\033[0;35m"
+#define CYAN    "\033[0;36m"
+#define WHITE   "\033[0;37m"
 
 // Bold text
 #define BBLACK   "\033[1;30m"
@@ -222,14 +115,14 @@ extern int PrintWorkingDirectory(Color color);
 #define WHITEB   "\033[47m"
 
 // High intensity background
-#define BLACKHB  "\033[0;100m"
-#define REDHB    "\033[0;101m"
-#define GREENHB  "\033[0;102m"
-#define YELLOWHB "\033[0;103m"
-#define BLUEHB   "\033[0;104m"
-#define PURPLEHB "\033[0;105m"
-#define CYANHB   "\033[0;106m"
-#define WHITEHB  "\033[0;107m"
+#define BLACKHBG  "\033[0;100m"
+#define REDHBG    "\033[0;101m"
+#define GREENHBG  "\033[0;102m"
+#define YELLOWHBG "\033[0;103m"
+#define BLUEHBG   "\033[0;104m"
+#define PURPLEHBG "\033[0;105m"
+#define CYANHBG   "\033[0;106m"
+#define WHITEHBG  "\033[0;107m"
 
 // Darkened high-intensity text
 #define DHBLACK   "\033[2;90m"

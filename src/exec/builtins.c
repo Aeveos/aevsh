@@ -36,14 +36,14 @@ static int cmd_pwd(char args[64][256], int args_count) {
 static int cmd_cd(char args[64][256], int args_count) {
 
 	if (args_count < 2) {
-		printf(aRED "Please define the directory.\n" RESET);
+		printf(RED "Please define the directory.\n" RESET);
 		printf("\n");
 		return 0;
 	}
 	else {
 
 		if (_chdir(args[1]) != 0) {
-			printf(aRED "Error : Directory not found! \n" RESET);
+			printf(RED "Error : Directory not found! \n" RESET);
 			printf("\n");
 			return 0;
 		}

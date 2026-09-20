@@ -28,7 +28,7 @@ int main() {
 	while (1) {
 		token_count = 0;
 
-		PrintWorkingDirectory(COLOR_NONE);
+		PrintWorkingDirectory("");
 		printf(">");
 
 		input();
