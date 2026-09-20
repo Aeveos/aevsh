@@ -12,7 +12,7 @@ Implement history again
 #include <exec/builtins.h>
 #include <core/input.h>
 #include <Windows.h>
-#include <Termiox/toxstd.h>
+#include <Termiox/termiox.h>
 
 char buffered_input[256];
 char history[10][256];
@@ -28,13 +28,17 @@ int main() {
 	while (1) {
 		token_count = 0;
 
-		PrintWorkingDirectory();
+		PrintWorkingDirectory(COLOR_NONE);
+		printf(">");
 
 		input();
 
 		if (unbuffered_input[0] == '\n' || '\0') {
 			continue;
 		}
+
+		memcpy(history[history_count], unbuffered_input, sizeof(unbuffered_input));
+		history_count++;
 
 #ifdef DEBUG
 		printf("%s", unbuffered_input);

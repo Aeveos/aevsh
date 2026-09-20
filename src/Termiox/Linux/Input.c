@@ -1,6 +1,6 @@
 #ifndef _WIN32
 
-#include <Termiox/Input.h>
+#include <Termiox/termiox.h>
 #include <locale.h>
 #include <notcurses/notcurses.h>
 #include <stdint.h>

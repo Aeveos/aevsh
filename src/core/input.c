@@ -1,4 +1,4 @@
-#include <Termiox/Input.h>
+#include <Termiox/termiox.h>
 #include <core/input.h>
 
 // #define DEBUG

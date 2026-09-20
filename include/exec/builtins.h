@@ -5,13 +5,6 @@
 #include <stdlib.h>
 #include <direct.h>
 
-#define RESET   "\033[0m"
-#define GREEN   "\033[32m" // Green
-#define RED     "\033[31m" // Red
-#define YELLOW  "\033[33m"
-#define BOLDGREEN   "\033[1m\033[32m" // Bold Green
-#define BOLDRED  "\033[1m\033[31m" // Bold Red
-
 // extern int args_count;
 
 struct Command {

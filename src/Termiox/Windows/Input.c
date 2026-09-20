@@ -1,6 +1,6 @@
 #ifdef _WIN32
 
-#include <Termiox/Input.h>
+#include <Termiox/termiox.h>
 #include <Windows.h>
 #include <wincon.h>
 
@@ -59,14 +59,29 @@ int initializeConsole() {
     hConsole = GetStdHandle(STD_INPUT_HANDLE);
 
     if (hConsole == NULL || hConsole == INVALID_HANDLE_VALUE) {
-        fprintf(stderr, "GetStdHandle Failed!!");
-        GetLastError();
+        fprintf(stderr, "Input GetStdHandle Failed!!");
+        //GetLastError();
         return 0;
     }
 
     if (!GetConsoleMode(hConsole, &originalMode)) {
         fprintf(stderr, "GetConsoleMod Failed!!");
-        GetLastError();
+        // GetLastError();
+        return 0;
+    }
+
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD outMode = 0;
+
+    if (!GetConsoleMode(hOut, &outMode)) {
+        fprintf(stderr, "Out GetStdHandle Failed!!");
+       //GetLastError();
+        return 0;
+    }
+
+    if (!SetConsoleMode(hOut, outMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
+        fprintf(stderr, "ANSI Escape Codes initialization Failed!!");
+        //GetLastError();
         return 0;
     }
 
