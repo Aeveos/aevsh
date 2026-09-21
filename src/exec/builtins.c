@@ -16,11 +16,11 @@ static struct Command builtIn_cmd[] = { {.cmd_name = "exit", .func = cmd_exit, .
 
 static int cmd_clear(char args[64][256], int args_count) {
 
-#ifdef _WIN32
-	system("cls");
-#else
-	system("clear");
-#endif
+	if(!ClrScreen()) {
+		fprintf(stderr, "ClrScreen failed!!");
+		return 0;
+	}
+
 	return 1;
 }
 
