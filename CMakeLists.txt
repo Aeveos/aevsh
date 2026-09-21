@@ -20,6 +20,9 @@ add_executable (Aevsh "src/core/core.c"
                       "src/exec/builtins.c"
                       "src/frontend/lexer.c"
                       "src/core/input.c"
+                      "src/Termiox/Input.c"
+                      "src/Termiox/Pwd.c"
+                      "src/Termiox/ClrScreen.c"
 )
 
 target_include_directories(Aevsh PRIVATE
@@ -29,16 +32,10 @@ target_include_directories(Aevsh PRIVATE
 if(WIN32)
 
   target_sources(Aevsh PRIVATE
-                 assets/resource.rc
-          src/Termiox/Windows/Input.c
-          src/Termiox/Windows/Pwd.c)
-
+                 assets/resource.rc)
 else ()
 
-  target_sources(Aevsh PRIVATE
-          src/Termiox/Linux/Input.c
-          src/Termiox/Linux/Pwd.c)
-
+  target_sources(Aevsh PRIVATE)
 
   find_package(PkgConfig REQUIRED)
 

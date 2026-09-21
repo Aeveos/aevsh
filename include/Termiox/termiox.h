@@ -52,6 +52,8 @@ extern void enableRawMode();
 extern int readKey(Key *key);
 
 /*PrintWorkingDirectory.h*/
+
+#define MAX_PATH 260
 extern int PrintWorkingDirectory(const char *color);
 
 /*Colors.h*/
@@ -156,3 +158,8 @@ extern int PrintWorkingDirectory(const char *color);
 
 // Reset
 #define RESET "\033[0m"
+
+/*ClrScreen.h*/
+
+int ClrScreen();
+
